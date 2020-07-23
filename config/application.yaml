@@ -1,0 +1,14 @@
+LaunchPads:
+  BitCoinBelow9000:
+    Active: false
+    ProbeSetting:
+      arguments: 'https://cointelegraph.com/bitcoin-price-index'
+    Probe:
+      class: 'webProbe\Probes\CoinTelegraphBitcoinPriceProbe'
+    MissionSetting:
+      arguments:
+        frequency: 3600
+        params:
+          threshold: 9000
+    Mission:
+      class: 'webProbe\Missions\BitCoinPriceLowerThanMission'
