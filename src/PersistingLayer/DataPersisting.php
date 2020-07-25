@@ -27,19 +27,15 @@ class DataPersisting
         }
     }
 
-    public function query(string $query)
+    public function query(string $query):? int
     {
-        $sql = "SELECT * FROM links";
         try {
-            $stmt = $this->dbConnection->query($sql);
+            $this->dbConnection->query($query);
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
-        var_dump($stmt);
-        while ($row = $stmt->fetch()) {
-            var_dump($row);
-        }
 
+        return $this->dbConnection->lastInsertId();
     }
 
 }

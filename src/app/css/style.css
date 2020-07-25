@@ -61,3 +61,6 @@ div.close_icon {
 	background-image: url('../assets/closeIcon.png');
 	background-size: cover;
 }
+div.insert_area {
+	display: none;
+}

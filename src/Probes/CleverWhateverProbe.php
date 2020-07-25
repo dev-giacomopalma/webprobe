@@ -40,7 +40,7 @@ class CleverWhateverProbe implements Probe
             ];
 
             $probeResult->statusCode = ProbeResult::OK_STATUS_CODE;
-            $probeResult->payload = $payload;
+            $probeResult->payload = json_encode($payload);
         } catch (Exception $exception) {
             $probeResult->statusCode = $exception->getCode();
             $probeResult->errorMessage = $exception->getMessage();
