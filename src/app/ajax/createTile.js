@@ -8,7 +8,7 @@ function submitLink() {
 		data: {o:"submitLink", url:url},
 		dataType: "html"
 	})
-		.done(function(){
-			$('#insert_area').html('OK!');
+		.done(function(data){
+			$('#insert_area').html(data);
 		});
 }

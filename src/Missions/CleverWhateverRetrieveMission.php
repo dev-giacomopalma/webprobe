@@ -34,11 +34,13 @@ class CleverWhateverRetrieveMission extends BaseMission
             $this->persistLinkAttribute($linkId, $payload);
             $priceId = $this->persistCurrentPrice($linkId, $payload);
             $this->persistLinkPrice($linkId, $priceId);
+            $payloadArray = json_decode($probeResult->payload, true);
+            $payloadArray['linkId'] = $linkId;
 
         } else {
             //TODO log error execution
         }
-        return new MissionResult($statusCode);
+        return new MissionResult($statusCode, json_encode($payloadArray));
     }
 
     private function persistLink(stdClass $payload):? int

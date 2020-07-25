@@ -4,6 +4,8 @@ namespace webProbe\LaunchPad;
 
 use webProbe\LaunchPad\Interfaces\LaunchPad as LaunchPadInterface;
 use webProbe\Missions\Interfaces\Mission;
+use webProbe\Missions\Interfaces\MissionResult;
+
 
 class LaunchPad implements LaunchPadInterface
 {
@@ -16,10 +18,10 @@ class LaunchPad implements LaunchPadInterface
         $this->mission = $mission;
     }
 
-    public function launch(): void
+    public function launch(): MissionResult
     {
         if ($this->verifyLaunchAuthorization()) {
-            $this->getMission()->execute();
+            return $this->getMission()->execute();
         }
     }
 

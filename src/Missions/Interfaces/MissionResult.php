@@ -10,9 +10,13 @@ class MissionResult
     /** @var int */
     private $statusCode;
 
-    public function __construct(int $statusCode)
+    /** @var string */
+    private $result;
+
+    public function __construct(int $statusCode, string $result)
     {
         $this->statusCode = $statusCode;
+        $this->result = $result;
     }
 
     /**
@@ -21,5 +25,13 @@ class MissionResult
     public function getStatusCode(): int
     {
         return $this->statusCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResult(): string
+    {
+        return $this->result;
     }
 }
