@@ -1,10 +1,8 @@
 <?php
 
-
 namespace webProbe\Probes\Libraries;
 
-
-use Exception;
+use ScrapeElementNotFound;
 use webProbe\Probes\Helpers\ScraperHelper;
 
 class TitleDiscoveryLibrary
@@ -22,7 +20,7 @@ class TitleDiscoveryLibrary
         try {
             $body = ScraperHelper::readAfter('<title"', $this->page, true);
             return trim(ScraperHelper::readBetween('>', '<', $body, true));
-        } catch (Exception $exception) {
+        } catch (ScrapeElementNotFound $exception) {
             return null;
         }
     }

@@ -6,6 +6,7 @@ use HeadlessChromium\BrowserFactory;
 use Exception;
 use HTMLPageDto;
 use PageLoadException;
+use ScrapeElementNotFound;
 
 class ScraperHelper
 {
@@ -90,7 +91,7 @@ class ScraperHelper
             return $blocks[1];
         }
 
-        return $strict === true ? new Exception('Delimiter not found') : '';
+        return $strict === true ? new ScrapeElementNotFound('Delimiter not found') : '';
     }
 
     public static function readBefore(string $deliminter, string $body, bool $strict = false): string
@@ -100,7 +101,7 @@ class ScraperHelper
             return $blocks[0];
         }
 
-        return $strict === true ? new Exception('Delimiter not found') : '';
+        return $strict === true ? new ScrapeElementNotFound('Delimiter not found') : '';
     }
 
     /**
@@ -108,19 +109,20 @@ class ScraperHelper
      * if $strict == true, return an exception instead of an empty string
      * in case delimiters are not found in body
      *
-     * @param string $leftDeliminter
+     * @param string $leftDelimiter
      * @param string $rightDelimiter
      * @param string $body
      * @param bool $strict
      * @return string
+     * @throws ScrapeElementNotFound
      */
     public static function readBetween(
-        string $leftDeliminter,
+        string $leftDelimiter,
         string $rightDelimiter,
         string $body,
         bool $strict = false
     ):string {
-        $body = self::readAfter($leftDeliminter, $body, $strict);
+        $body = self::readAfter($leftDelimiter, $body, $strict);
         return self::readBefore($rightDelimiter, $body, $strict);
     }
 }

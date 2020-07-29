@@ -1,9 +1,8 @@
 <?php
 
-
 namespace webProbe\Probes\Libraries;
 
-use Exception;
+use ScrapeElementNotFound;
 use webProbe\Probes\Helpers\ScraperHelper;
 
 class CanonicalDiscoveryLibrary
@@ -21,7 +20,7 @@ class CanonicalDiscoveryLibrary
         try {
             $body = ScraperHelper::readAfter('rel="canonical"', $this->page, true);
             return trim(ScraperHelper::readBetween('href="', '"', $body, true));
-        } catch (Exception $exception) {
+        } catch (ScrapeElementNotFound $exception) {
             return null;
         }
 

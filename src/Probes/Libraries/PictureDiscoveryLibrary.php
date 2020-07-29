@@ -2,7 +2,7 @@
 
 namespace webProbe\Probes\Libraries;
 
-use Exception;
+use ScrapeElementNotFound;
 use webProbe\Probes\Helpers\ScraperHelper;
 
 class PictureDiscoveryLibrary
@@ -24,7 +24,7 @@ class PictureDiscoveryLibrary
             $this->page,
             true);
         return ScraperHelper::readBefore('?', trim($pictureUrl));
-        } catch (Exception $exception) {
+        } catch (ScrapeElementNotFound $exception) {
             return null;
         }
     }
