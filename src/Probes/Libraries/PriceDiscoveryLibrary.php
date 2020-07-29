@@ -1,6 +1,6 @@
 <?php
 
-namespace webProbe\Libraries;
+namespace webProbe\Probes\Libraries;
 
 class PriceDiscoveryLibrary
 {

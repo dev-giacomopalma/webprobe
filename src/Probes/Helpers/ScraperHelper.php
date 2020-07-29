@@ -4,7 +4,8 @@ namespace webProbe\Probes\Helpers;
 
 use HeadlessChromium\BrowserFactory;
 use Exception;
-use HeadlessChromium\PageUtils\PageNavigation;
+use HTMLPageDto;
+use PageLoadException;
 
 class ScraperHelper
 {
@@ -13,24 +14,22 @@ class ScraperHelper
 
     /**
      * @param string $url
-     * @return string
+     * @return HTMLPageDto
      * @throws Exception
      */
-    public static function loadPage(string $url): string
+    public static function loadPage(string $url): HTMLPageDto
     {
         $browserFactory = new BrowserFactory('chromium-browser');
         $browser = $browserFactory->createBrowser();
         $page = $browser->createPage();
         $page->navigate($url)->waitForNavigation();
-        $htmlContent =
-            $page->evaluate("document.head.innerHTML")->getReturnValue()
-            .$page->evaluate("document.body.innerHTML")->getReturnValue();
-
-        if (null !== $htmlContent) {
-            return $htmlContent;
+        $head = $page->evaluate("document.head.innerHTML")->getReturnValue();
+        $body = $page->evaluate("document.body.innerHTML")->getReturnValue();
+        if (null !== $head && null !== $body) {
+            return new HTMLPageDto($head, $body);
         }
 
-        throw new Exception('Page not loaded');
+        throw new PageLoadException(sprintf('Page not loaded. Url: %s', $url));
 
     }
 
@@ -82,5 +81,46 @@ class ScraperHelper
         }
 
         return $block;
+    }
+
+    public static function readAfter(string $deliminter, string $body, bool $strict = false): string
+    {
+        $blocks = explode($deliminter, $body);
+        if (count($blocks) > 1) {
+            return $blocks[1];
+        }
+
+        return $strict === true ? new Exception('Delimiter not found') : '';
+    }
+
+    public static function readBefore(string $deliminter, string $body, bool $strict = false): string
+    {
+        $blocks = explode($deliminter, $body);
+        if (count($blocks) > 1) {
+            return $blocks[0];
+        }
+
+        return $strict === true ? new Exception('Delimiter not found') : '';
+    }
+
+    /**
+     * Read string contained between left and right delimiter
+     * if $strict == true, return an exception instead of an empty string
+     * in case delimiters are not found in body
+     *
+     * @param string $leftDeliminter
+     * @param string $rightDelimiter
+     * @param string $body
+     * @param bool $strict
+     * @return string
+     */
+    public static function readBetween(
+        string $leftDeliminter,
+        string $rightDelimiter,
+        string $body,
+        bool $strict = false
+    ):string {
+        $body = self::readAfter($leftDeliminter, $body, $strict);
+        return self::readBefore($rightDelimiter, $body, $strict);
     }
 }

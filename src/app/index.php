@@ -34,6 +34,7 @@ require_once '../../vendor/autoload.php';
 				$("#confirm_button").delay(0).hide(0);
 				$("#add_button").delay(300).show(0);
 				$("#close_icon").delay(300).hide(0);
+				$("#insert_area").html('<input type="text" id="url" />');
 				$("#insert_area").delay(300).hide(0);
 			}
 		});
