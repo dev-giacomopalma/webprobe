@@ -1,5 +1,6 @@
 <?php
 
+namespace webProbe\Probes\Dtos;
 
 class HTMLPageDto
 {

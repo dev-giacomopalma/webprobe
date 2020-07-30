@@ -30,10 +30,10 @@ class CleverWhateverProbe implements Probe
 
             $payload = [
                 'url' => $this->probeSetting->getUrl(),
-                'canonical' => $this->getCanonical($page->getHead()),
+                'canonical' => $this->getCanonical($page->getBody()),
                 'price' => $this->getPrice($page->getBody()),
                 'picture' => $this->getPicture($page->getBody()),
-                'title' => $this->getTitle($page->getHead())
+                'title' => $this->getTitle($page->getBody())
             ];
 
             $probeResult->statusCode = ProbeResult::OK_STATUS_CODE;

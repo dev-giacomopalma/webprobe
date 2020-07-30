@@ -4,9 +4,9 @@ namespace webProbe\Probes\Helpers;
 
 use HeadlessChromium\BrowserFactory;
 use Exception;
-use HTMLPageDto;
-use PageLoadException;
-use ScrapeElementNotFound;
+use webProbe\Probes\Dtos\HTMLPageDto;
+use webProbe\Probes\Exceptions\PageLoadException;
+use webProbe\Probes\Exceptions\ScrapeElementNotFound;
 
 class ScraperHelper
 {
@@ -84,24 +84,32 @@ class ScraperHelper
         return $block;
     }
 
-    public static function readAfter(string $deliminter, string $body, bool $strict = false): string
+    public static function readAfter(string $delimiter, string $body, bool $strict = false): string
     {
-        $blocks = explode($deliminter, $body);
+        $blocks = explode($delimiter, $body);
         if (count($blocks) > 1) {
             return $blocks[1];
         }
 
-        return $strict === true ? new ScrapeElementNotFound('Delimiter not found') : '';
+        if ($strict) {
+            throw new ScrapeElementNotFound(sprintf('%s : Delimiter not found %s', __FUNCTION__, $delimiter));
+        }
+
+        return '';
     }
 
-    public static function readBefore(string $deliminter, string $body, bool $strict = false): string
+    public static function readBefore(string $delimiter, string $body, bool $strict = false): string
     {
-        $blocks = explode($deliminter, $body);
+        $blocks = explode($delimiter, $body);
         if (count($blocks) > 1) {
             return $blocks[0];
         }
 
-        return $strict === true ? new ScrapeElementNotFound('Delimiter not found') : '';
+        if ($strict) {
+            throw new ScrapeElementNotFound(sprintf('%s : Delimiter not found  %s',__FUNCTION__, $delimiter));
+        }
+
+        return '';
     }
 
     /**

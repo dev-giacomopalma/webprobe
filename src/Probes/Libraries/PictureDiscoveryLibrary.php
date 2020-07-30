@@ -2,7 +2,7 @@
 
 namespace webProbe\Probes\Libraries;
 
-use ScrapeElementNotFound;
+use webProbe\Probes\Exceptions\ScrapeElementNotFound;
 use webProbe\Probes\Helpers\ScraperHelper;
 
 class PictureDiscoveryLibrary

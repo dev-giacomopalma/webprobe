@@ -1,5 +1,8 @@
 <?php
 
+namespace webProbe\Probes\Exceptions;
+
+use Exception;
 
 class ScrapeElementNotFound extends Exception
 {
