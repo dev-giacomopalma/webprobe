@@ -15,7 +15,7 @@ class PictureDiscoveryLibrary
         $this->page = $page;
     }
 
-    public function findPicture():? string
+    public function findOgImage():? string
     {
         try {
         $pictureUrl = ScraperHelper::readBetween(

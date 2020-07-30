@@ -61,7 +61,7 @@ class CleverWhateverProbe implements Probe
     {
         $pictureDiscovery = new PictureDiscoveryLibrary($page);
         try {
-            return $pictureDiscovery->findPicture();
+            return $pictureDiscovery->findOgImage();
         } catch (Exception $exception) {
             throw $exception;
         }
@@ -71,7 +71,7 @@ class CleverWhateverProbe implements Probe
     {
         $titleDiscovery = new TitleDiscoveryLibrary($page);
         try {
-            return $titleDiscovery->findTitle();
+            return $titleDiscovery->findHTMLTitle();
         } catch (Exception $exception) {
             throw $exception;
         }

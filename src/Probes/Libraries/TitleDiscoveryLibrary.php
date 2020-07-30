@@ -15,7 +15,7 @@ class TitleDiscoveryLibrary
         $this->page = $page;
     }
 
-    public function findTitle():? string
+    public function findHTMLTitle():? string
     {
         try {
             $body = ScraperHelper::readAfter('<title"', $this->page, true);
