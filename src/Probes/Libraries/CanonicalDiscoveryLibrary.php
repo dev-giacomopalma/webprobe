@@ -2,10 +2,7 @@
 
 namespace webProbe\Probes\Libraries;
 
-use webProbe\Probes\Exceptions\ScrapeElementNotFound;
-use webProbe\Probes\Helpers\ScraperHelper;
-
-class CanonicalDiscoveryLibrary
+class CanonicalDiscoveryLibrary extends DiscoveryLibrary
 {
     /** @var string */
     private $page;
@@ -17,12 +14,11 @@ class CanonicalDiscoveryLibrary
 
     public function findCanonical():? string
     {
-        try {
-            $body = ScraperHelper::readAfter('rel="canonical"', $this->page, true);
-            return trim(ScraperHelper::readBetween('href="', '"', $body, true));
-        } catch (ScrapeElementNotFound $exception) {
-            return null;
-        }
-
+        return $this->readAfterAndBetween(
+            $this->page,
+            'rel="canonical"',
+            'href="',
+            '"'
+        );
     }
 }
