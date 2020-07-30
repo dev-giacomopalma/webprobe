@@ -2,6 +2,8 @@
 
 namespace webProbe\Probes\Libraries;
 
+use webProbe\Probes\Exceptions\ScrapeElementNotFound;
+
 class TitleDiscoveryLibrary extends DiscoveryLibrary
 {
     /** @var string */
@@ -12,14 +14,17 @@ class TitleDiscoveryLibrary extends DiscoveryLibrary
         $this->page = $page;
     }
 
-    public function findHTMLTitle():? string
+    public function findHTMLTitle(): string
     {
-
-        return $this->readAfterAndBetween(
-            $this->page,
-            '<title"',
-            '>',
-            '<'
-        );
+        try {
+            return $this->readAfterAndBetween(
+                $this->page,
+                '<title"',
+                '>',
+                '<'
+            );
+        } catch (ScrapeElementNotFound $exception) {
+            return null;
+        }
     }
 }

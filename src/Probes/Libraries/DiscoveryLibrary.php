@@ -19,7 +19,7 @@ class DiscoveryLibrary
             $body = ScraperHelper::readAfter($afterDelimiter, $body, $strict);
             return trim(ScraperHelper::readBetween($betweenLeftDelimiter, $betweenRightDelimiter, $body, $strict));
         } catch (ScrapeElementNotFound $exception) {
-            return null;
+            throw $exception;
         }
     }
 
@@ -38,7 +38,7 @@ class DiscoveryLibrary
                 $strict);
             return ScraperHelper::readBefore($beforeDelimiter, trim($body), $strict);
         } catch (ScrapeElementNotFound $exception) {
-            return null;
+            throw $exception;
         }
     }
 

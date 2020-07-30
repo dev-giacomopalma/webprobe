@@ -2,6 +2,8 @@
 
 namespace webProbe\Probes\Libraries;
 
+use webProbe\Probes\Exceptions\ScrapeElementNotFound;
+
 class PictureDiscoveryLibrary extends DiscoveryLibrary
 {
     /** @var string */
@@ -14,12 +16,16 @@ class PictureDiscoveryLibrary extends DiscoveryLibrary
 
     public function findOgImage():? string
     {
-        return $this->readBetweenAndBefore(
-            $this->page,
-            '"og:image" content="',
-            '"',
-            '?'
-        );
+        try {
+            return $this->readBetweenAndBefore(
+                $this->page,
+                '"og:image" content="',
+                '"',
+                '?'
+            );
+        } catch (ScrapeElementNotFound $exception) {
+            return null;
+        }
     }
 
 }
