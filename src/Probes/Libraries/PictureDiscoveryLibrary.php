@@ -17,13 +17,16 @@ class PictureDiscoveryLibrary extends DiscoveryLibrary
     public function findOgImage():? string
     {
         try {
-            return $this->readBetweenAndBefore(
+            $elements = $this->readBetweenAndBefore(
                 $this->page,
                 '"og:image" content="',
                 '"',
                 '?',
+                false,
                 true
             );
+
+            return $elements[0];
         } catch (ScrapeElementNotFound $exception) {
             return null;
         }

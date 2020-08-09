@@ -17,13 +17,16 @@ class CanonicalDiscoveryLibrary extends DiscoveryLibrary
     public function findCanonical():? string
     {
         try {
-            return $this->readAfterAndBetween(
+            $element = $this->readAfterAndBetween(
                 $this->page,
                 'rel="canonical"',
                 'href="',
                 '"',
+                false,
                 true
             );
+
+            return $element[0];
         } catch (ScrapeElementNotFound $exception) {
             return null;
         }
@@ -48,13 +51,16 @@ class CanonicalDiscoveryLibrary extends DiscoveryLibrary
     public function findOgUrl():? string
     {
         try {
-            return $this->readAfterAndBetween(
+            $elements =  $this->readAfterAndBetween(
                 $this->page,
                 'property="og:url"',
                 'content="',
                 '"',
+                false,
                 true
             );
+
+            return $elements[0];
         } catch (ScrapeElementNotFound $exception) {
             return null;
         }
@@ -63,13 +69,16 @@ class CanonicalDiscoveryLibrary extends DiscoveryLibrary
     public function findOgSite():? string
     {
         try {
-            return $this->readAfterAndBetween(
+            $elements = $this->readAfterAndBetween(
                 $this->page,
                 'property="og:site"',
                 'content="',
                 '"',
+                false,
                 true
             );
+
+            return $elements[0];
         } catch (ScrapeElementNotFound $exception) {
             return null;
         }

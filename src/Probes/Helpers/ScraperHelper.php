@@ -87,43 +87,56 @@ class ScraperHelper
     /**
      * @param string $delimiter
      * @param string $body
+     * @param bool $fullList
      * @param bool $strict
-     * @return string
+     * @return array
      * @throws ScrapeElementNotFound
      */
-    public static function readAfter(string $delimiter, string $body, bool $strict = false): string
+    public static function readAfter(string $delimiter, string $body, bool $fullList = false, bool $strict = false): array
     {
         $blocks = explode($delimiter, $body);
         if (count($blocks) > 1) {
-            return $blocks[1];
+            if (false === $fullList) {
+                return [$blocks[1]];
+            }
+
+            unset($blocks[0]);
+            return array_values($blocks);
         }
 
         if ($strict) {
             throw new ScrapeElementNotFound(sprintf('%s : Delimiter not found %s', __FUNCTION__, $delimiter));
         }
 
-        return '';
+        return [];
     }
 
     /**
      * @param string $delimiter
      * @param string $body
+     * @param bool $fullList
      * @param bool $strict
-     * @return string
+     * @return array
      * @throws ScrapeElementNotFound
      */
-    public static function readBefore(string $delimiter, string $body, bool $strict = false): string
+    public static function readBefore(string $delimiter, string $body, bool $fullList = false, bool $strict = false): array
     {
         $blocks = explode($delimiter, $body);
         if (count($blocks) > 1) {
-            return $blocks[0];
+            if (false === $fullList) {
+                return [$blocks[0]];
+            }
+
+            unset($blocks[count($blocks) -1]);
+            return array_values($blocks);
+
         }
 
         if ($strict) {
             throw new ScrapeElementNotFound(sprintf('%s : Delimiter not found  %s',__FUNCTION__, $delimiter));
         }
 
-        return '';
+        return [];
     }
 
     /**
@@ -134,17 +147,29 @@ class ScraperHelper
      * @param string $leftDelimiter
      * @param string $rightDelimiter
      * @param string $body
+     * @param bool $fullList
      * @param bool $strict
-     * @return string
+     * @return array
      * @throws ScrapeElementNotFound
      */
     public static function readBetween(
         string $leftDelimiter,
         string $rightDelimiter,
         string $body,
+        bool $fullList = false,
         bool $strict = false
-    ):string {
-        $body = self::readAfter($leftDelimiter, $body, $strict);
-        return self::readBefore($rightDelimiter, $body, $strict);
+    ): array {
+        $elements = self::readAfter($leftDelimiter, $body, $fullList, $strict);
+        $vals = [];
+        $insideVals = [];
+        foreach ($elements as $element) {
+            $insideVals = self::readBefore($rightDelimiter, $element, $fullList, $strict);
+        }
+
+        foreach ($insideVals as $insideVal) {
+            $vals[] = $insideVal;
+        }
+
+        return $vals;
     }
 }
