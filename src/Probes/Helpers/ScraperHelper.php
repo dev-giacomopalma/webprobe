@@ -84,6 +84,13 @@ class ScraperHelper
         return $block;
     }
 
+    /**
+     * @param string $delimiter
+     * @param string $body
+     * @param bool $strict
+     * @return string
+     * @throws ScrapeElementNotFound
+     */
     public static function readAfter(string $delimiter, string $body, bool $strict = false): string
     {
         $blocks = explode($delimiter, $body);
@@ -98,6 +105,13 @@ class ScraperHelper
         return '';
     }
 
+    /**
+     * @param string $delimiter
+     * @param string $body
+     * @param bool $strict
+     * @return string
+     * @throws ScrapeElementNotFound
+     */
     public static function readBefore(string $delimiter, string $body, bool $strict = false): string
     {
         $blocks = explode($delimiter, $body);
