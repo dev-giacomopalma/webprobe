@@ -2,7 +2,7 @@
 
 namespace webProbe\Probes\Libraries;
 
-class PriceDiscoveryLibrary
+class PriceDiscoveryLibrary extends DiscoveryLibrary
 {
     private const ANALISE_STRING_LENGHT = 6;
     private const DEFAULT_CURRENCY = '€';

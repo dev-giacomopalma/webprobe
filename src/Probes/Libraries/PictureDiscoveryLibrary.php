@@ -3,9 +3,8 @@
 namespace webProbe\Probes\Libraries;
 
 use webProbe\Probes\Exceptions\ScrapeElementNotFound;
-use webProbe\Probes\Helpers\ScraperHelper;
 
-class PictureDiscoveryLibrary
+class PictureDiscoveryLibrary extends DiscoveryLibrary
 {
     /** @var string */
     private $page;
@@ -18,12 +17,12 @@ class PictureDiscoveryLibrary
     public function findOgImage():? string
     {
         try {
-        $pictureUrl = ScraperHelper::readBetween(
-            '"og:image" content="',
-            '"',
-            $this->page,
-            true);
-        return ScraperHelper::readBefore('?', trim($pictureUrl));
+            return $this->readBetweenAndBefore(
+                $this->page,
+                '"og:image" content="',
+                '"',
+                '?'
+            );
         } catch (ScrapeElementNotFound $exception) {
             return null;
         }

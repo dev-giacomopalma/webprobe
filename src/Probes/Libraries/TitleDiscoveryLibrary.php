@@ -3,9 +3,8 @@
 namespace webProbe\Probes\Libraries;
 
 use webProbe\Probes\Exceptions\ScrapeElementNotFound;
-use webProbe\Probes\Helpers\ScraperHelper;
 
-class TitleDiscoveryLibrary
+class TitleDiscoveryLibrary extends DiscoveryLibrary
 {
     /** @var string */
     private $page;
@@ -15,12 +14,15 @@ class TitleDiscoveryLibrary
         $this->page = $page;
     }
 
-    public function findHTMLTitle():? string
+    public function findHTMLTitle(): string
     {
         try {
-            $body = ScraperHelper::readAfter('<title"', $this->page, true);
-            var_dump(substr($body,0,30));
-            return trim(ScraperHelper::readBetween('>', '<', $body, true));
+            return $this->readAfterAndBetween(
+                $this->page,
+                '<title"',
+                '>',
+                '<'
+            );
         } catch (ScrapeElementNotFound $exception) {
             return null;
         }
