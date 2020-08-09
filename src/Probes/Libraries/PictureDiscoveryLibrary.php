@@ -21,7 +21,8 @@ class PictureDiscoveryLibrary extends DiscoveryLibrary
                 $this->page,
                 '"og:image" content="',
                 '"',
-                '?'
+                '?',
+                true
             );
         } catch (ScrapeElementNotFound $exception) {
             return null;

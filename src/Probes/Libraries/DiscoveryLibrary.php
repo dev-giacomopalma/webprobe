@@ -17,7 +17,7 @@ class DiscoveryLibrary
     ):? string {
         try {
             $body = ScraperHelper::readAfter($afterDelimiter, $body, $strict);
-            return trim(ScraperHelper::readBetween($betweenLeftDelimiter, $betweenRightDelimiter, $body, $strict));
+            return $this->readBetween($betweenLeftDelimiter, $betweenRightDelimiter, $body, $strict);
         } catch (ScrapeElementNotFound $exception) {
             throw $exception;
         }
@@ -31,7 +31,7 @@ class DiscoveryLibrary
         bool $strict = false
     ):? string {
         try {
-            $body = ScraperHelper::readBetween(
+            $body = $this->readBetween(
                 $betweenLeftDelimiter,
                 $betweenRightDelimiter,
                 $body,
@@ -40,6 +40,15 @@ class DiscoveryLibrary
         } catch (ScrapeElementNotFound $exception) {
             throw $exception;
         }
+    }
+
+    public function readBetween(
+        string $betweenLeftDelimiter,
+        string $betweenRightDelimiter,
+        string $body,
+        bool $strict = false
+    ): string {
+        return trim(ScraperHelper::readBetween($betweenLeftDelimiter, $betweenRightDelimiter, $body, $strict));
     }
 
 }
