@@ -163,11 +163,11 @@ class ScraperHelper
         $vals = [];
         $insideVals = [];
         foreach ($elements as $element) {
-            $insideVals = self::readBefore($rightDelimiter, $element, $fullList, $strict);
+            $insideVals[] = self::readBefore($rightDelimiter, $element, $fullList, $strict);
         }
 
         foreach ($insideVals as $insideVal) {
-            $vals[] = $insideVal;
+            $vals[] = $insideVal[0];
         }
 
         return $vals;

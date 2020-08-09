@@ -21,11 +21,11 @@ class DiscoveryLibrary
             $vals = [];
             $insideVals = [];
             foreach ($elements as $element) {
-                $insideVals = $this->readBetween($betweenLeftDelimiter, $betweenRightDelimiter, $element, $fullList, $strict);
+                $insideVals[] = $this->readBetween($betweenLeftDelimiter, $betweenRightDelimiter, $element, false, $strict);
             }
 
             foreach ($insideVals as $insideVal) {
-                $vals[] = $insideVal;
+                $vals[] = $insideVal[0];
             }
 
             return $vals;
@@ -52,11 +52,11 @@ class DiscoveryLibrary
                 $fullList,
                 $strict);
             foreach ($elements as $element) {
-                $insideVals = ScraperHelper::readBefore($beforeDelimiter, trim($element), $strict);
+                $insideVals[] = ScraperHelper::readBefore($beforeDelimiter, trim($element), $strict);
             }
 
             foreach ($insideVals as $insideVal) {
-                $vals[] = $insideVal;
+                $vals[] = $insideVal[0];
             }
 
             return $vals;
