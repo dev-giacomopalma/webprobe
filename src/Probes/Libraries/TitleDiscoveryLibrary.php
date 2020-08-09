@@ -16,16 +16,13 @@ class TitleDiscoveryLibrary extends DiscoveryLibrary
 
     public function findHTMLTitle(): string
     {
-        try {
-            return $this->readBetween(
-                '<title>',
-                '<',
-                $this->page,
-                true
-
-                );
-        } catch (ScrapeElementNotFound $exception) {
-            return null;
-        }
+        $elements = $this->readBetween(
+            '<title>',
+            '<',
+            $this->page,
+            false,
+            true
+            );
+        return $elements[0];
     }
 }
