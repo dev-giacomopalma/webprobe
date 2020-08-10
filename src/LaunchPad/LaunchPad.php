@@ -20,23 +20,11 @@ class LaunchPad implements LaunchPadInterface
 
     public function launch(): MissionResult
     {
-        if ($this->verifyLaunchAuthorization()) {
-            return $this->getMission()->execute();
-        }
+        return $this->getMission()->execute();
     }
 
     public function getMission(): Mission
     {
         return $this->mission;
     }
-
-    private function verifyLaunchAuthorization(): bool
-    {
-        //TODO check authorization to launch the mission
-        // as first check we verify that the last execution was at least distant as
-        // missionSetting->getExecutionFrequency
-        $missionFrequencyAllowed = $this->getMission()->getSettings()->getExecutionFrequency();
-        return true;
-    }
-
 }
