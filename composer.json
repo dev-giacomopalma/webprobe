@@ -1,6 +1,6 @@
 {
 	"autoload": {
-		"psr-4": {"webProbe\\": "src/", "tests\\": "test/", "cw\\": "src/app/classes"}
+		"psr-4": {"webProbe\\": "src/", "tests\\": "test/"}
 	},
 	"config": {
 		"platform": {
