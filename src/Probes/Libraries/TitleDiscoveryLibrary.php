@@ -14,11 +14,17 @@ class TitleDiscoveryLibrary extends DiscoveryLibrary
         $this->page = $page;
     }
 
+    /**
+     * Return the value contained in the HTML tag <title></ (if present)
+     *
+     * @return string
+     * @throws ScrapeElementNotFound
+     */
     public function findHTMLTitle(): string
     {
         $elements = $this->readBetween(
             '<title>',
-            '<',
+            '</',
             $this->page,
             false,
             true

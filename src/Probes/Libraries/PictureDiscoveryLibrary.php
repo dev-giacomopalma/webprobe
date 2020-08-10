@@ -14,6 +14,11 @@ class PictureDiscoveryLibrary extends DiscoveryLibrary
         $this->page = $page;
     }
 
+    /**
+     * Return the image url contained in the content of og:image (if present)
+     *
+     * @return string|null
+     */
     public function findOgImage():? string
     {
         try {

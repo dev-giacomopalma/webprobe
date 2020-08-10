@@ -14,6 +14,11 @@ class CanonicalDiscoveryLibrary extends DiscoveryLibrary
         $this->page = $page;
     }
 
+    /**
+     * Return the value contained in the href of the rel="canonical" in the page (if present)
+     *
+     * @return string|null
+     */
     public function findCanonical():? string
     {
         try {
@@ -32,6 +37,11 @@ class CanonicalDiscoveryLibrary extends DiscoveryLibrary
         }
     }
 
+    /**
+     * Return the concatenation of og:site and og:url (if both presents)
+     *
+     * @return string|null
+     */
     public function findOgFullUrl():? string
     {
         $ogSite = $this->findOgSite();
@@ -48,6 +58,11 @@ class CanonicalDiscoveryLibrary extends DiscoveryLibrary
         return $ogSite.$ogUrl;
     }
 
+    /**
+     * Return the url contained in the content of og:url (if present)
+     *
+     * @return string|null
+     */
     public function findOgUrl():? string
     {
         try {
@@ -66,7 +81,12 @@ class CanonicalDiscoveryLibrary extends DiscoveryLibrary
         }
     }
 
-    public function findOgSite():? string
+    /**
+     * Return the site url contained in the content of og:site (if present)
+     *
+     * @return string|null
+     */
+    public function fin‘dOgSite():? string
     {
         try {
             $elements = $this->readAfterAndBetween(

@@ -8,6 +8,18 @@ use webProbe\Probes\Helpers\ScraperHelper;
 class DiscoveryLibrary
 {
 
+    /**
+     * Read after an identifier and then inside two delimiter
+     *
+     * @param string $body
+     * @param string $afterDelimiter
+     * @param string $betweenLeftDelimiter
+     * @param string $betweenRightDelimiter
+     * @param bool $fullList
+     * @param bool $strict
+     * @return array|null
+     * @throws ScrapeElementNotFound
+     */
     public function readAfterAndBetween(
         string $body,
         string $afterDelimiter,
@@ -34,6 +46,18 @@ class DiscoveryLibrary
         }
     }
 
+    /**
+     * Read inside two delimiter and with the result received, read before an identifier
+     *
+     * @param string $body
+     * @param string $betweenLeftDelimiter
+     * @param string $betweenRightDelimiter
+     * @param string $beforeDelimiter
+     * @param bool $fullList
+     * @param bool $strict
+     * @return array|null
+     * @throws ScrapeElementNotFound
+     */
     public function readBetweenAndBefore(
         string $body,
         string $betweenLeftDelimiter,
@@ -65,6 +89,17 @@ class DiscoveryLibrary
         }
     }
 
+    /**
+     * Read between two delimiters
+     *
+     * @param string $betweenLeftDelimiter
+     * @param string $betweenRightDelimiter
+     * @param string $body
+     * @param bool $fullList
+     * @param bool $strict
+     * @return array
+     * @throws ScrapeElementNotFound
+     */
     public function readBetween(
         string $betweenLeftDelimiter,
         string $betweenRightDelimiter,
