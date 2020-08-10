@@ -7,7 +7,7 @@ use webProbe\Missions\Interfaces\MissionResult;
 use webProbe\Missions\Settings\MissionSetting;
 use webProbe\Probes\Interfaces\Probe;
 
-class BaseMission implements Mission
+abstract class BaseMission implements Mission
 {
 
     /** @var MissionSetting */
@@ -22,10 +22,7 @@ class BaseMission implements Mission
         $this->probe = $probe;
     }
 
-    public function execute(): MissionResult
-    {
-        //empty body
-    }
+    abstract public function execute(): MissionResult;
 
     public function getSettings(): MissionSetting
     {
