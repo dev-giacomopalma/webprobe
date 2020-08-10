@@ -1,4 +1,6 @@
 {
+	"name": "twittingeek/webProbe",
+	"description": "send a probe in a mission on a website to be explored",
 	"autoload": {
 		"psr-4": {"webProbe\\": "src/", "tests\\": "test/"}
 	},
