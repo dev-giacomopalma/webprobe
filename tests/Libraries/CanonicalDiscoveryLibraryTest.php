@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use webProbe\Probes\Libraries\CanonicalDiscoveryLibrary;
+use twittingeek\webProbe\Probes\Libraries\CanonicalDiscoveryLibrary;
 
 class CanonicalDiscoveryLibraryTest extends TestCase
 {

@@ -1,7 +1,6 @@
 <?php
 
-
-namespace webProbe\Probes\Helpers;
+namespace twittingeek\webProbe\Probes\Helpers;
 
 
 class PriceScraperHelper extends ScraperHelper

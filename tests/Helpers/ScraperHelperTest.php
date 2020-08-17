@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use webProbe\Probes\Helpers\ScraperHelper;
+use twittingeek\webProbe\Probes\Helpers\ScraperHelper;
 
 class ScraperHelperTest extends TestCase
 {

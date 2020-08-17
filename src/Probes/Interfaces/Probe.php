@@ -1,9 +1,9 @@
 <?php
 
-namespace webProbe\Probes\Interfaces;
+namespace twittingeek\webProbe\Probes\Interfaces;
 
-use webProbe\Probes\ProbeResult;
-use webProbe\Probes\Settings\ProbeSetting;
+use twittingeek\webProbe\Probes\ProbeResult;
+use twittingeek\webProbe\Probes\Settings\ProbeSetting;
 
 interface Probe
 {

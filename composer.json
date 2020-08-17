@@ -1,8 +1,8 @@
 {
-	"name": "webProbe",
+	"name": "twittingeek/webProbe",
 	"description": "send a probe in a mission on a website to be explored",
 	"autoload": {
-		"psr-4": {"": "src/", "tests\\": "test/"}
+		"psr-4": {"twittingeek\\webProbe": "src/", "tests\\": "test/"}
 	},
 	"config": {
 		"platform": {

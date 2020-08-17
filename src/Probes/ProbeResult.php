@@ -1,7 +1,6 @@
 <?php
 
-
-namespace webProbe\Probes;
+namespace twittingeek\webProbe\Probes;
 
 class ProbeResult
 {

@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use webProbe\Probes\Helpers\PriceScraperHelper;
+use twittingeek\webProbe\Probes\Helpers\PriceScraperHelper;
 
 class PriceScraperHelperTest extends TestCase
 {

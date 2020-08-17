@@ -1,6 +1,6 @@
 <?php
 
-namespace webProbe\Probes\Libraries;
+namespace twittingeek\webProbe\Probes\Libraries;
 
 class PriceDiscoveryLibrary extends DiscoveryLibrary
 {

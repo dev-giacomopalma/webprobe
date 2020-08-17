@@ -1,9 +1,9 @@
 <?php
 
-namespace webProbe\Probes\Libraries;
+namespace twittingeek\webProbe\Probes\Libraries;
 
-use webProbe\Probes\Exceptions\ScrapeElementNotFound;
-use webProbe\Probes\Helpers\ScraperHelper;
+use twittingeek\webProbe\Probes\Exceptions\ScrapeElementNotFound;
+use twittingeek\webProbe\Probes\Helpers\ScraperHelper;
 
 class DiscoveryLibrary
 {

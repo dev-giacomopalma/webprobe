@@ -1,9 +1,9 @@
 <?php
 
-namespace webProbe\Missions\Interfaces;
+namespace twittingeek\webProbe\Missions\Interfaces;
 
-use webProbe\Missions\Settings\MissionSetting;
-use webProbe\Probes\Interfaces\Probe;
+use twittingeek\webProbe\Missions\Settings\MissionSetting;
+use twittingeek\webProbe\Probes\Interfaces\Probe;
 
 interface Mission
 {

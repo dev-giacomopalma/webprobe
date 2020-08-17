@@ -1,10 +1,10 @@
 <?php
 
-namespace webProbe\LaunchPad;
+namespace twittingeek\webProbe\LaunchPad;
 
-use webProbe\LaunchPad\Interfaces\LaunchPad as LaunchPadInterface;
-use webProbe\Missions\Interfaces\Mission;
-use webProbe\Missions\Interfaces\MissionResult;
+use twittingeek\webProbe\LaunchPad\Interfaces\LaunchPad as LaunchPadInterface;
+use twittingeek\webProbe\Missions\Interfaces\Mission;
+use twittingeek\webProbe\Missions\Interfaces\MissionResult;
 
 
 class LaunchPad implements LaunchPadInterface

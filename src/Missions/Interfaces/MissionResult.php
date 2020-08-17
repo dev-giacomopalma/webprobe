@@ -1,6 +1,6 @@
 <?php
 
-namespace webProbe\Missions\Interfaces;
+namespace twittingeek\webProbe\Missions\Interfaces;
 
 class MissionResult
 {

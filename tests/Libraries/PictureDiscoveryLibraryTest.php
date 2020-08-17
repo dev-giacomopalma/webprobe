@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use webProbe\Probes\Libraries\PictureDiscoveryLibrary;
+use twittingeek\webProbe\Probes\Libraries\PictureDiscoveryLibrary;
 
 class PictureDiscoveryLibraryTest extends TestCase {
 

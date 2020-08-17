@@ -1,6 +1,6 @@
 <?php
 
-namespace webProbe\Probes\Settings;
+namespace twittingeek\webProbe\Probes\Settings;
 
 class ProbeSetting
 {

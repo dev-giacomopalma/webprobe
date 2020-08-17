@@ -1,11 +1,11 @@
 <?php
 
-namespace webProbe\Missions;
+namespace twittingeek\webProbe\Missions;
 
-use webProbe\Missions\Interfaces\Mission;
-use webProbe\Missions\Interfaces\MissionResult;
-use webProbe\Missions\Settings\MissionSetting;
-use webProbe\Probes\Interfaces\Probe;
+use twittingeek\webProbe\Missions\Interfaces\Mission;
+use twittingeek\webProbe\Missions\Interfaces\MissionResult;
+use twittingeek\webProbe\Missions\Settings\MissionSetting;
+use twittingeek\webProbe\Probes\Interfaces\Probe;
 
 abstract class BaseMission implements Mission
 {

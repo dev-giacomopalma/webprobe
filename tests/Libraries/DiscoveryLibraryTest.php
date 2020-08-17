@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use webProbe\Probes\Libraries\DiscoveryLibrary;
+use twittingeek\webProbe\Probes\Libraries\DiscoveryLibrary;
 
 class DiscoveryLibraryTest extends TestCase
 {

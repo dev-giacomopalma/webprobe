@@ -1,9 +1,9 @@
 <?php
 
-namespace webProbe\LaunchPad\Interfaces;
+namespace twittingeek\webProbe\LaunchPad\Interfaces;
 
-use webProbe\Missions\Interfaces\Mission;
-use webProbe\Missions\Interfaces\MissionResult;
+use twittingeek\webProbe\Missions\Interfaces\Mission;
+use twittingeek\webProbe\Missions\Interfaces\MissionResult;
 
 interface LaunchPad
 

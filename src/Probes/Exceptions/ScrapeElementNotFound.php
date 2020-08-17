@@ -1,6 +1,6 @@
 <?php
 
-namespace webProbe\Probes\Exceptions;
+namespace twittingeek\webProbe\Probes\Exceptions;
 
 use Exception;
 

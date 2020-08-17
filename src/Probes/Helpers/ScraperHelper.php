@@ -1,12 +1,12 @@
 <?php
 
-namespace webProbe\Probes\Helpers;
+namespace twittingeek\webProbe\Probes\Helpers;
 
 use HeadlessChromium\BrowserFactory;
 use Exception;
-use webProbe\Probes\Dtos\HTMLPageDto;
-use webProbe\Probes\Exceptions\PageLoadException;
-use webProbe\Probes\Exceptions\ScrapeElementNotFound;
+use twittingeek\webProbe\Probes\Dtos\HTMLPageDto;
+use twittingeek\webProbe\Probes\Exceptions\PageLoadException;
+use twittingeek\webProbe\Probes\Exceptions\ScrapeElementNotFound;
 
 class ScraperHelper
 {

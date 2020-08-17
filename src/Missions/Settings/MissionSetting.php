@@ -1,5 +1,5 @@
 <?php
-namespace webProbe\Missions\Settings;
+namespace twittingeek\webProbe\Missions\Settings;
 
 class MissionSetting
 {

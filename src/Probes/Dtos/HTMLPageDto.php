@@ -1,6 +1,6 @@
 <?php
 
-namespace webProbe\Probes\Dtos;
+namespace twittingeek\webProbe\Probes\Dtos;
 
 class HTMLPageDto
 {
