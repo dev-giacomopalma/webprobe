@@ -2,7 +2,7 @@
 	"name": "twittingeek/webProbe",
 	"description": "send a probe in a mission on a website to be explored",
 	"autoload": {
-		"psr-4": {"twittingeek\\webProbe": "src/", "tests\\": "test/"}
+		"psr-4": {"twittingeek\\webProbe\\": "src/", "tests\\": "test/"}
 	},
 	"config": {
 		"platform": {
@@ -13,8 +13,6 @@
 		"phpunit/phpunit": "^7"
 	},
 	"require": {
-		"symfony/yaml": "^5.1",
-		"doctrine/orm": "*",
 		"chrome-php/chrome": "^0.8.1"
 	}
 }
