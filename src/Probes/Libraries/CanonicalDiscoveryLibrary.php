@@ -86,7 +86,7 @@ class CanonicalDiscoveryLibrary extends DiscoveryLibrary
      *
      * @return string|null
      */
-    public function fin‘dOgSite():? string
+    public function findOgSite():? string
     {
         try {
             $elements = $this->readAfterAndBetween(
