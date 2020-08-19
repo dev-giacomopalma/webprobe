@@ -119,6 +119,7 @@ Available in webProbe/Libraries are
 - PictureDiscoveryLibrary
 - PriceDiscoveryLibrary (dev)
 - TitleDiscoveryLibrary
+- DomainDiscoveryLibrary
 
 ### ScraperHelper and PriceScraperHelper
 In order to extend the capacity of **DisoveryLibrary** there are static methods available in 
