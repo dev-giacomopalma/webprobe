@@ -14,4 +14,10 @@ class DomainDiscoveryLibrary extends DiscoveryLibrary
     {
         return parse_url($url, PHP_URL_HOST);
     }
+
+    public function findMainDomain(string $url): string
+    {
+        $parts = explode('.', $this->findDomain($url));
+        return $parts[1];
+    }
 }
