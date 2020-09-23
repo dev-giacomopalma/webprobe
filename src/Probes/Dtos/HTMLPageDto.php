@@ -13,7 +13,7 @@ class HTMLPageDto
     /** @var string */
     private $body;
 
-    public function __construct(string $body, string $head)
+    public function __construct(string $head, string $body)
     {
         $this->head = $head;
         $this->body = $body;

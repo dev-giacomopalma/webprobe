@@ -4,6 +4,7 @@ namespace twittingeek\webProbe\Probes\Helpers;
 
 use HeadlessChromium\BrowserFactory;
 use Exception;
+use HeadlessChromium\Page;
 use twittingeek\webProbe\Probes\Dtos\HTMLPageDto;
 use twittingeek\webProbe\Probes\Exceptions\PageLoadException;
 use twittingeek\webProbe\Probes\Exceptions\ScrapeElementNotFound;
@@ -15,15 +16,47 @@ class ScraperHelper
 
     /**
      * @param string $url
+     * @param string $actions
      * @return HTMLPageDto
-     * @throws Exception
+     * @throws PageLoadException
+     * @throws \HeadlessChromium\Exception\CommunicationException
+     * @throws \HeadlessChromium\Exception\CommunicationException\CannotReadResponse
+     * @throws \HeadlessChromium\Exception\CommunicationException\InvalidResponse
+     * @throws \HeadlessChromium\Exception\CommunicationException\ResponseHasError
+     * @throws \HeadlessChromium\Exception\EvaluationFailed
+     * @throws \HeadlessChromium\Exception\NavigationExpired
+     * @throws \HeadlessChromium\Exception\NoResponseAvailable
+     * @throws \HeadlessChromium\Exception\OperationTimedOut
      */
-    public static function loadPage(string $url): HTMLPageDto
+    public static function loadPage(string $url, string $actions = null): HTMLPageDto
     {
         $browserFactory = new BrowserFactory('chromium-browser');
-        $browser = $browserFactory->createBrowser();
+        $browser = $browserFactory->createBrowser(
+            [
+                'startupTimeout' => 120,
+                'connectionDelay' => 3.8,
+                'sendSyncDefaultTimeout' => 60000,
+                'debug' => true,
+            ]);
         $page = $browser->createPage();
         $page->navigate($url)->waitForNavigation();
+        if (null !== $actions) {
+            $actions = json_decode($actions);
+            if (!empty($actions)) {
+                foreach ($actions as $key => $action) {
+                    try {
+                        self::evaluatePage($page, $action);
+                    } catch (Exception $exception) {
+                        throw new PageLoadException(
+                            sprintf(
+                                'Elements evaluation was not possible: %s',
+                                $exception->getMessage()
+                            )
+                        );
+                    }
+                }
+            }
+        }
         $head = $page->evaluate("document.head.innerHTML")->getReturnValue();
         $body = $page->evaluate("document.body.innerHTML")->getReturnValue();
         if (null !== $head && null !== $body) {
@@ -171,5 +204,42 @@ class ScraperHelper
         }
 
         return $vals;
+    }
+
+    private static function evaluatePage(Page $page, $action): void
+    {
+        $identifier = $action->identifier;
+        for ($i = 1; $i <= $action->repeat; $i++) {
+            switch ($action->action) {
+                case 'set':
+                    $expression = sprintf(
+                        '(() => {document.querySelector("%s").value = "%s";})()',
+                        $identifier,
+                        $action->value
+                    );
+                    break;
+                case 'click':
+                    $expression = sprintf(
+                        '(() => {document.querySelector("%s").click();})()',
+                        $identifier,
+                        );
+                    break;
+                case 'submit':
+                    $expression = sprintf(
+                        '(() => {document.querySelector("%s").submit();})()',
+                        $identifier,
+                        );
+                    break;
+                default:
+                    throw new Exception(sprintf('Action not recognized: %s', $action->action)); //use a better exception
+                    break;
+            }
+            $evaluate = $page->evaluate($expression);
+            if ($action->action === 'click') {
+                $evaluate->waitForPageReload(Page::LOAD, 50000);
+            }
+
+            $page->screenshot(['clip' => $page->getFullPageClip()])->saveToFile($i.'.png');
+        }
     }
 }
