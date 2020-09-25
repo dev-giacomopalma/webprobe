@@ -8,9 +8,13 @@ class ProbeSetting
     /** @var string */
     private $url;
 
-    public function __construct(string $url)
+    /** @var array */
+    private $preparation;
+
+    public function __construct(string $url, array $preparation)
     {
         $this->url = $url;
+        $this->preparation = $preparation;
     }
 
     /**
@@ -19,6 +23,14 @@ class ProbeSetting
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPreparation(): array
+    {
+        return $this->preparation;
     }
 
 
