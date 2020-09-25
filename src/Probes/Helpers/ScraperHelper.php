@@ -208,7 +208,14 @@ class ScraperHelper
 
     private static function evaluatePage(Page $page, $action): void
     {
-        $identifier = $action->identifier;
+        switch ($action->attribute) {
+            case 'id':
+                $identifier = '#'.$action->identifier;
+                break;
+            case 'name':
+                $identifier = "name='".$action->identifier."'";
+                break;
+        }
         for ($i = 1; $i <= $action->repeat; $i++) {
             switch ($action->action) {
                 case 'set':
