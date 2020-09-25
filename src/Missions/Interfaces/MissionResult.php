@@ -10,13 +10,13 @@ class MissionResult
     /** @var int */
     private $statusCode;
 
-    /** @var string */
-    private $result;
+    /** @var array */
+    private $payload;
 
-    public function __construct(int $statusCode, string $result)
+    public function __construct(int $statusCode, array $payload)
     {
         $this->statusCode = $statusCode;
-        $this->result = $result;
+        $this->payload = $payload;
     }
 
     /**
@@ -30,8 +30,8 @@ class MissionResult
     /**
      * @return string
      */
-    public function getResult(): string
+    public function getPayload(): string
     {
-        return $this->result;
+        return $this->payload;
     }
 }

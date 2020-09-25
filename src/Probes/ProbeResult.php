@@ -13,7 +13,7 @@ class ProbeResult
     /** @var string */
     public $errorMessage;
 
-    /** @var string */
+    /** @var array */
     public $payload;
 
 }
