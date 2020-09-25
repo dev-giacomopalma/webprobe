@@ -4,19 +4,33 @@ namespace twittingeek\webProbe\Missions\Settings;
 class MissionSetting
 {
 
+    /** @var string */
+    private $resultType;
+
     /** @var array */
-    private $params;
+    private $evaluation;
 
-    public function __construct(array $params = [])
+    public function __construct(string $resultType, array $evaluation)
     {
-        $this->params = $params;
+        $this->resultType = $resultType;
+        $this->evaluation = $evaluation;
     }
 
-    public function getParams(): array
+    /**
+     * @return string
+     */
+    public function getResultType(): string
     {
-        return $this->params;
+        return $this->resultType;
     }
 
+    /**
+     * @return array
+     */
+    public function getEvaluation(): array
+    {
+        return $this->evaluation;
+    }
 
 
 }
