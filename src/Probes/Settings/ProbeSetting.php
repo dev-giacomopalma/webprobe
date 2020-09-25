@@ -11,7 +11,7 @@ class ProbeSetting
     /** @var array */
     private $preparation;
 
-    public function __construct(string $url, array $preparation)
+    public function __construct(string $url, array $preparation = [])
     {
         $this->url = $url;
         $this->preparation = $preparation;

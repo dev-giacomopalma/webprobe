@@ -10,7 +10,7 @@ class MissionSetting
     /** @var array */
     private $evaluation;
 
-    public function __construct(string $resultType, array $evaluation)
+    public function __construct(string $resultType, array $evaluation = [])
     {
         $this->resultType = $resultType;
         $this->evaluation = $evaluation;
