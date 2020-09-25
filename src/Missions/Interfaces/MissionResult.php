@@ -28,9 +28,9 @@ class MissionResult
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getPayload(): string
+    public function getPayload(): array
     {
         return $this->payload;
     }
