@@ -17,6 +17,7 @@ class ScraperHelper
     /**
      * @param string $url
      * @param string $actions
+     * @param string $browserIdentifier
      * @return HTMLPageDto
      * @throws PageLoadException
      * @throws \HeadlessChromium\Exception\CommunicationException
@@ -28,15 +29,19 @@ class ScraperHelper
      * @throws \HeadlessChromium\Exception\NoResponseAvailable
      * @throws \HeadlessChromium\Exception\OperationTimedOut
      */
-    public static function loadPage(string $url, string $actions = null): HTMLPageDto
-    {
-        $browserFactory = new BrowserFactory('chromium-browser');
+    public static function loadPage(
+        string $url,
+        string $actions = null,
+        string $browserIdentifier = 'chromium-browser'
+    ): HTMLPageDto {
+        $browserFactory = new BrowserFactory($browserIdentifier);
         $browser = $browserFactory->createBrowser(
             [
                 'startupTimeout' => 120,
                 'connectionDelay' => 3.8,
                 'sendSyncDefaultTimeout' => 60000,
                 'debug' => true,
+                'noSandbox' => true
             ]);
         $page = $browser->createPage();
         $page->navigate($url)->waitForNavigation();
