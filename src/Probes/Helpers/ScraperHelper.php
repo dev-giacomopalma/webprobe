@@ -250,8 +250,6 @@ class ScraperHelper
             if ($action->action === 'click') {
                 $evaluate->waitForPageReload(Page::LOAD, 50000);
             }
-
-            $page->screenshot(['clip' => $page->getFullPageClip()])->saveToFile($i.'.png');
         }
     }
 }
