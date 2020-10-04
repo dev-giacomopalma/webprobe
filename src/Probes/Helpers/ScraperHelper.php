@@ -32,7 +32,7 @@ class ScraperHelper
     public static function loadPage(
         string $url,
         string $actions = null,
-        string $browserIdentifier = 'chromium-browser'
+        string $browserIdentifier = 'chromium'
     ): HTMLPageDto {
         $browserFactory = new BrowserFactory($browserIdentifier);
         $browser = $browserFactory->createBrowser(
