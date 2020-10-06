@@ -6,13 +6,24 @@ use HeadlessChromium\BrowserFactory;
 use Exception;
 use HeadlessChromium\Page;
 use twittingeek\webProbe\Probes\Dtos\HTMLPageDto;
+use twittingeek\webProbe\Probes\Exceptions\EvaluationException;
 use twittingeek\webProbe\Probes\Exceptions\PageLoadException;
 use twittingeek\webProbe\Probes\Exceptions\ScrapeElementNotFound;
+use twittingeek\webProbe\Probes\Exceptions\UnrecognisedActionException;
+use twittingeek\webProbe\Probes\Exceptions\UnrecognisedAttributeException;
 
 class ScraperHelper
 {
 
     private const HTML_ELEMENT_TYPE_SPAN = 'span';
+
+    private const ID_ATTRIBUTE_NAME = 'id';
+    private const NAME_ATTRIBUTE_NAME = 'name';
+
+    private const VALID_ATTRIBUTE_NAMES = [
+        self::ID_ATTRIBUTE_NAME,
+        self::NAME_ATTRIBUTE_NAME
+    ];
 
     /**
      * @param string $url
@@ -56,7 +67,8 @@ class ScraperHelper
                             sprintf(
                                 'Elements evaluation was not possible: %s',
                                 $exception->getMessage()
-                            )
+                            ),
+                            $exception->getCode()
                         );
                     }
                 }
@@ -211,6 +223,13 @@ class ScraperHelper
         return $vals;
     }
 
+    /**
+     * @param Page $page
+     * @param $action
+     * @throws UnrecognisedActionException
+     * @throws UnrecognisedAttributeException
+     * @throws EvaluationException
+     */
     private static function evaluatePage(Page $page, $action): void
     {
         switch ($action->attribute) {
@@ -220,6 +239,14 @@ class ScraperHelper
             case 'name':
                 $identifier = "name='".$action->identifier."'";
                 break;
+            default:
+                throw new UnrecognisedAttributeException(
+                    sprintf(
+                        'Unrecognised attribute %s List of valid attributes: %s',
+                        $action->attribute,
+                        implode(', ', self::VALID_ATTRIBUTE_NAMES)
+                        )
+                );
         }
         for ($i = 1; $i <= $action->repeat; $i++) {
             switch ($action->action) {
@@ -243,12 +270,21 @@ class ScraperHelper
                         );
                     break;
                 default:
-                    throw new Exception(sprintf('Action not recognized: %s', $action->action)); //use a better exception
+                    throw new UnrecognisedActionException(
+                        sprintf('Action not recognized: %s', $action->action)
+                    );
                     break;
             }
-            $evaluate = $page->evaluate($expression);
-            if ($action->action === 'click') {
-                $evaluate->waitForPageReload(Page::LOAD, 50000);
+            try {
+                $evaluate = $page->evaluate($expression);
+                if ($action->action === 'click') {
+                    $evaluate->waitForPageReload(Page::LOAD, 50000);
+                }
+            } catch (Exception $exception) {
+                throw new EvaluationException(
+                    $exception->getMessage(),
+                    $exception->getCode()
+                );
             }
         }
     }
