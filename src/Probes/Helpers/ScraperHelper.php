@@ -65,7 +65,7 @@ class ScraperHelper
                     } catch (Exception $exception) {
                         throw new PageLoadException(
                             sprintf(
-                                'Elements evaluation was not possible: %s',
+                                'Elements evaluation was not possible. %s',
                                 $exception->getMessage()
                             ),
                             $exception->getCode()
