@@ -237,7 +237,7 @@ class ScraperHelper
                 $identifier = '#'.$action->identifier;
                 break;
             case 'name':
-                $identifier = "name='".$action->identifier."'";
+                $identifier = "[name='".$action->identifier."']";
                 break;
             default:
                 throw new UnrecognisedAttributeException(
