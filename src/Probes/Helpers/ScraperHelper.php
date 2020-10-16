@@ -55,7 +55,7 @@ class ScraperHelper
                 'noSandbox' => true
             ]);
         $page = $browser->createPage();
-        $page->navigate($url)->waitForNavigation();
+        $page->navigate($url)->waitForNavigation('networkIdle');
         if (null !== $actions) {
             $actions = json_decode($actions);
             if (!empty($actions)) {
@@ -278,7 +278,7 @@ class ScraperHelper
             try {
                 $evaluate = $page->evaluate($expression);
                 if ($action->action === 'click') {
-                    $evaluate->waitForPageReload(Page::LOAD, 50000);
+                    $evaluate->waitForPageReload('networkIdle', 50000);
                 }
             } catch (Exception $exception) {
                 throw new EvaluationException(
