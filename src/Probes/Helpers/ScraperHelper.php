@@ -52,10 +52,11 @@ class ScraperHelper
                 'connectionDelay' => 3.8,
                 'sendSyncDefaultTimeout' => 60000,
                 'debug' => true,
-                'noSandbox' => true
+                'noSandbox' => true,
+                'userAgent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15',
             ]);
         $page = $browser->createPage();
-        $page->navigate($url)->waitForNavigation('networkIdle');
+        $page->navigate($url)->waitForNavigation(Page::NETWORK_IDLE, 60000);
         if (null !== $actions) {
             $actions = json_decode($actions);
             if (!empty($actions)) {
@@ -277,14 +278,15 @@ class ScraperHelper
             }
             try {
                 $evaluate = $page->evaluate($expression);
-                if ($action->action === 'click') {
-                    $evaluate->waitForPageReload('networkIdle', 50000);
-                }
             } catch (Exception $exception) {
                 throw new EvaluationException(
                     $exception->getMessage(),
                     $exception->getCode()
                 );
+            }
+
+            if ($action->action === 'click') {
+                $evaluate->waitForPageReload(Page::NETWORK_IDLE, 30000);
             }
         }
     }
