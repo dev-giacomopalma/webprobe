@@ -2,9 +2,11 @@
 
 namespace twittingeek\webProbe\Probes\Libraries;
 
+use Psr\Log\LoggerInterface;
+
 class PriceDiscoveryLibrary extends DiscoveryLibrary
 {
-    private const ANALISE_STRING_LENGHT = 6;
+    private const ANALISE_STRING_LENGHT = 15;
     private const DEFAULT_CURRENCY = '€';
     private const CURRENCIES_REPLACE = [
         self::DEFAULT_CURRENCY => [
@@ -18,8 +20,12 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
     /** @var string */
     private $currency;
 
-    public function __construct(string $page, string $currency = self::DEFAULT_CURRENCY)
+    /** @var LoggerInterface */
+    private $logger;
+
+    public function __construct(LoggerInterface $logger, string $page, string $currency = self::DEFAULT_CURRENCY)
     {
+        $this->logger = $logger;
         $this->page = $page;
 
         if (!array_key_exists($currency, self::CURRENCIES_REPLACE)) {
@@ -88,6 +94,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
                 break;
         }
         $portion = trim($portion);
+        $this->logger->info(sprintf('Portion: %s', $portion));
 
         if ($portion === '') {
             return null;
