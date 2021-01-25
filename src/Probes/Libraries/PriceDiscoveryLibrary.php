@@ -20,12 +20,12 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
     /** @var string */
     private $currency;
 
-    /** @var LoggerInterface */
-    private $logger;
+    /** @var array */
+    private $stack;
 
-    public function __construct(LoggerInterface $logger, string $page, string $currency = self::DEFAULT_CURRENCY)
+    public function __construct(string $page, string $currency = self::DEFAULT_CURRENCY)
     {
-        $this->logger = $logger;
+        $this->stack = [];
         $this->page = $page;
 
         if (!array_key_exists($currency, self::CURRENCIES_REPLACE)) {
@@ -34,7 +34,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
         $this->currency = $currency;
     }
 
-    public function findPrice():? string
+    public function findPrice(): array
     {
         $this->preparePage();
         $allPricesFound = $this->analiseChunksForPrices(
@@ -42,7 +42,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
         );
 
         $allPricesFound = array_values(array_filter($allPricesFound));
-        return $allPricesFound[0];
+        return [$this->stack, 'price' => $allPricesFound[0]];
     }
 
     private function preparePage(): void
@@ -54,7 +54,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
             $this->page);
 
         $this->page = str_replace(['.',','],'', $this->page);
-        $this->logger->info($this->page);
+
     }
 
     private function getPageChunks(): array
@@ -66,7 +66,6 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
     {
         $allFound = [];
         foreach($pageChunks as $key => $chunk) {
-            $this->logger->info($chunk);
             if ($key === 0) { //only the right side counts
                 $allFound[] = $this->analiseSide('right', $chunk);
             } else if ($key === count($pageChunks) - 1) { //onluy the left counts
@@ -96,7 +95,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
                 break;
         }
         $portion = trim($portion);
-        $this->logger->info(sprintf('Portion: %s', $portion));
+        $this->stack[] = sprintf('Portion: %s', $portion);
 
         if ($portion === '') {
             return null;
