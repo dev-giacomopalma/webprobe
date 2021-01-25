@@ -8,7 +8,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
     private const DEFAULT_CURRENCY = '€';
     private const CURRENCIES_REPLACE = [
         self::DEFAULT_CURRENCY => [
-            '&euro;','eur','EUR','euro','euros','EURO','EUROS'
+            '&euro;','eur','EUR','euro','euros','EURO','EUROS','\u20ac'
         ]
     ];
 
