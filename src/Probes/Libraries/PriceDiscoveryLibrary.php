@@ -65,6 +65,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
     {
         $allFound = [];
         foreach($pageChunks as $key => $chunk) {
+            $this->logger->info($chunk);
             if ($key === 0) { //only the right side counts
                 $allFound[] = $this->analiseSide('right', $chunk);
             } else if ($key === count($pageChunks) - 1) { //onluy the left counts
