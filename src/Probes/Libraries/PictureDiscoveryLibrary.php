@@ -22,11 +22,10 @@ class PictureDiscoveryLibrary extends DiscoveryLibrary
     public function findOgImage():? string
     {
         try {
-            $elements = $this->readBetweenAndBefore(
-                $this->page,
+            $elements = $this->readBetween(
                 '"og:image" content="',
                 '"',
-                '?',
+                $this->page,
                 false,
                 true
             );
