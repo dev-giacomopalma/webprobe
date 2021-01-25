@@ -29,6 +29,10 @@ class TitleDiscoveryLibrary extends DiscoveryLibrary
             false,
             true
             );
-        return $elements[0];
+        if (isset( $elements[0])) {
+            return  $elements[0];
+        } else {
+            return '';
+        }
     }
 }

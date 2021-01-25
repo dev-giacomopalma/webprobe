@@ -31,7 +31,11 @@ class PictureDiscoveryLibrary extends DiscoveryLibrary
                 true
             );
 
-            return $elements[0];
+            if (isset($elements[0])) {
+                return $elements[0];
+            } else {
+                return null;
+            }
         } catch (ScrapeElementNotFound $exception) {
             return null;
         }
