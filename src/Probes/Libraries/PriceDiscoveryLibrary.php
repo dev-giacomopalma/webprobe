@@ -70,6 +70,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
     {
         $allFound = [];
         foreach($pageChunks as $key => $chunk) {
+            $this->stack[] = $chunk;
             if ($key === 0) { //only the right side counts
                 $allFound[] = $this->analiseSide('right', $chunk);
             } else if ($key === count($pageChunks) - 1) { //onluy the left counts
@@ -90,13 +91,19 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
         $chunk = trim(str_replace([' ','&nbsp;'],'',$chunk),' \t\n\r');
 
         $portion = '';
-        switch ($sideDirection) {
-            case 'right':
-                $portion = substr($chunk, strlen($chunk) - self::ANALISE_STRING_LENGHT, self::ANALISE_STRING_LENGHT + 1);
-                break;
-            case 'left':
-                $portion = substr($chunk, 0, self::ANALISE_STRING_LENGHT);
-                break;
+        if (strlen($chunk) > 0) {
+            switch ($sideDirection) {
+                case 'right':
+                    $portion = substr(
+                        $chunk,
+                        strlen($chunk) - self::ANALISE_STRING_LENGHT,
+                        self::ANALISE_STRING_LENGHT + 1
+                    );
+                    break;
+                case 'left':
+                    $portion = substr($chunk, 0, self::ANALISE_STRING_LENGHT);
+                    break;
+            }
         }
         $portion = trim($portion);
         $this->stack[] = sprintf('Portion: %s', $portion);
