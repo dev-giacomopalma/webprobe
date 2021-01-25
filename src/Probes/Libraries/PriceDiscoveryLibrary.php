@@ -54,6 +54,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
             $this->page);
 
         $this->page = str_replace(['.',','],'', $this->page);
+        $this->logger->info($this->page);
     }
 
     private function getPageChunks(): array
