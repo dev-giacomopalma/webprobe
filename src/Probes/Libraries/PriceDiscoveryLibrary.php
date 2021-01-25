@@ -2,11 +2,9 @@
 
 namespace twittingeek\webProbe\Probes\Libraries;
 
-use Psr\Log\LoggerInterface;
-
 class PriceDiscoveryLibrary extends DiscoveryLibrary
 {
-    private const ANALISE_STRING_LENGHT = 15;
+    private const ANALISE_STRING_LENGHT = 5;
     private const DEFAULT_CURRENCY = '€';
     private const CURRENCIES_REPLACE = [
         self::DEFAULT_CURRENCY => [
