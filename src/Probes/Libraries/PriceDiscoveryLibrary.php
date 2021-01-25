@@ -42,7 +42,11 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
         );
 
         $allPricesFound = array_values(array_filter($allPricesFound));
-        return ['stack' => $this->stack, 'price' => $allPricesFound[0]];
+        $price = null;
+        if (array_key_exists(0, $allPricesFound)) {
+            $price = $allPricesFound[0];
+        }
+        return ['stack' => $this->stack, 'price' => $price];
     }
 
     private function preparePage(): void
