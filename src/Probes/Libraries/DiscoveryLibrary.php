@@ -80,7 +80,9 @@ class DiscoveryLibrary
             }
 
             foreach ($insideVals as $insideVal) {
-                $vals[] = $insideVal[0];
+                if (isset($insideVal[0])) {
+                    $vals[] = $insideVal[0];
+                }
             }
 
             return $vals;
