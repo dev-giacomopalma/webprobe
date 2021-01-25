@@ -43,7 +43,7 @@ class PriceDiscoveryLibrary extends DiscoveryLibrary
 
         $allPricesFound = array_values(array_filter($allPricesFound));
         $price = null;
-        if (array_key_exists(0, $allPricesFound)) {
+        if (isset($allPricesFound[0]) && null !== $allPricesFound[0] && array_key_exists(0, $allPricesFound)) {
             $price = $allPricesFound[0];
         }
         return ['stack' => $this->stack, 'price' => $price];
