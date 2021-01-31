@@ -4,7 +4,7 @@ namespace twittingeek\webProbe\Probes\Libraries;
 
 class PriceDiscoveryLibrary extends DiscoveryLibrary
 {
-    private const ANALISE_STRING_LENGHT = 5;
+    private const ANALISE_STRING_LENGHT = 7;
     private const DEFAULT_CURRENCY = '€';
     private const CURRENCIES_REPLACE = [
         self::DEFAULT_CURRENCY => [
