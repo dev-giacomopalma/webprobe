@@ -250,7 +250,8 @@ class ScraperHelper
                         )
                 );
         }
-        for ($i = 1; $i <= $action->repeat; $i++) {
+        $repeat = $action->repeat ?? 1;
+        for ($i = 1; $i <= $repeat; $i++) {
             switch ($action->action) {
                 case 'set':
                     $expression = sprintf(
