@@ -1,5 +1,5 @@
 # webProbe
-PHP Library to send probes on missions to analyse websites.
+PHP Library to send probes on missions to perform actions on a websites.
 
 ## How does it work
 
@@ -7,12 +7,12 @@ PHP Library to send probes on missions to analyse websites.
 
 Execute missions.
 
-it take a **Mission** as argument for the constructor.
+it takes a **Mission** as argument for the constructor.
 The method **launch()** execute the mission through the method **execute()** and return an object of type
 **MissionResult**.
 
 
-```
+```php
 $launchPad =  new LaunchPad($mission);
 $missionResult = $launchPad->launch();
 

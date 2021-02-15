@@ -45,17 +45,22 @@ class ScraperHelper
         string $actions = null,
         string $browserIdentifier = 'chromium'
     ): HTMLPageDto {
-        $browserFactory = new BrowserFactory($browserIdentifier);
-        $browser = $browserFactory->createBrowser(
-            [
-                'startupTimeout' => 120,
-                'sendSyncDefaultTimeout' => 60000,
-                'debug' => false,
-                'noSandbox' => true,
-                'userAgent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15',
-            ]);
-        $page = $browser->createPage();
-        $page->navigate($url)->waitForNavigation(Page::NETWORK_IDLE, 60000);
+        try {
+            $browserFactory = new BrowserFactory($browserIdentifier);
+            $browser = $browserFactory->createBrowser(
+                [
+                    'startupTimeout' => 120,
+                    'sendSyncDefaultTimeout' => 60000,
+                    'debug' => false,
+                    'noSandbox' => true,
+                    'userAgent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15',
+                ]
+            );
+            $page = $browser->createPage();
+            $page->navigate($url)->waitForNavigation(Page::NETWORK_IDLE, 60000);
+        } catch (Exception $exception) {
+            throw new PageLoadException($exception->getMessage());
+        }
         if (null !== $actions) {
             $actions = json_decode($actions);
             if (!empty($actions)) {
