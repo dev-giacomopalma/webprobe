@@ -3,6 +3,7 @@
 namespace twittingeek\webProbe\Probes\Libraries;
 
 use twittingeek\webProbe\Probes\Exceptions\ScrapeElementNotFound;
+use twittingeek\webProbe\Probes\Helpers\ScraperHelper;
 
 class TitleDiscoveryLibrary extends DiscoveryLibrary
 {
@@ -30,7 +31,7 @@ class TitleDiscoveryLibrary extends DiscoveryLibrary
             true
             );
         if (isset( $elements[0])) {
-            return  $elements[0];
+            return ScraperHelper::readAfter('>',$elements[0])[0];
         } else {
             $elements = $this->readBetween(
                 '<h1',
@@ -40,7 +41,7 @@ class TitleDiscoveryLibrary extends DiscoveryLibrary
                 true
             );
             if (isset( $elements[0])) {
-                return  $elements[0];
+                return ScraperHelper::readAfter('>',$elements[0])[0];
             } else {
                 return '';
             }
