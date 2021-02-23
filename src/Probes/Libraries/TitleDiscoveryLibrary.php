@@ -23,7 +23,7 @@ class TitleDiscoveryLibrary extends DiscoveryLibrary
     public function findHTMLTitle(): string
     {
         $elements = $this->readBetween(
-            '<title>',
+            '<title',
             '</',
             $this->page,
             false,
@@ -32,7 +32,18 @@ class TitleDiscoveryLibrary extends DiscoveryLibrary
         if (isset( $elements[0])) {
             return  $elements[0];
         } else {
-            return '';
+            $elements = $this->readBetween(
+                '<h1',
+                '</',
+                $this->page,
+                false,
+                true
+            );
+            if (isset( $elements[0])) {
+                return  $elements[0];
+            } else {
+                return '';
+            }
         }
     }
 }
