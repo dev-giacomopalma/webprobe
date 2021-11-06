@@ -246,14 +246,12 @@ class ScraperHelper
             case 'name':
                 $identifier = "[name='".$action->identifier."']";
                 break;
+            case 'domxquery':
+                $identifier = $action->identifier;
+                break;
             default:
-                throw new UnrecognisedAttributeException(
-                    sprintf(
-                        'Unrecognised attribute %s List of valid attributes: %s',
-                        $action->attribute,
-                        implode(', ', self::VALID_ATTRIBUTE_NAMES)
-                        )
-                );
+                $identifier = "[".$action->attribute."='".$action->identifier."']";
+                break;
         }
         $repeat = $action->repeat ?? 1;
         for ($i = 1; $i <= $repeat; $i++) {
