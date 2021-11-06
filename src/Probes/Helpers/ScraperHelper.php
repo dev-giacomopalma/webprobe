@@ -263,6 +263,7 @@ class ScraperHelper
                         $action->value
                     );
                     break;
+                case 'asyncClick':
                 case 'click':
                     $expression = sprintf(
                         '(() => {document.querySelector("%s").click();})()',
@@ -292,6 +293,8 @@ class ScraperHelper
 
             if ($action->action === 'click') {
                 $evaluate->waitForPageReload(Page::NETWORK_IDLE, 30000);
+            } else if ($action->action === 'asyncClick') {
+                $evaluate->waitForPageReload(Page::DOM_CONTENT_LOADED, 30000);
             }
         }
     }
