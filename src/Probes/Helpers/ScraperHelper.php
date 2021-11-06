@@ -264,6 +264,11 @@ class ScraperHelper
                     );
                     break;
                 case 'asyncClick':
+                    $expression = sprintf(
+                        '(() => {document.querySelector("%s").click();})()',
+                        $identifier,
+                    );
+                    break;
                 case 'click':
                     $expression = sprintf(
                         '(() => {document.querySelector("%s").click();})()',
@@ -280,7 +285,6 @@ class ScraperHelper
                     throw new UnrecognisedActionException(
                         sprintf('Action not recognized: %s', $action->action)
                     );
-                    break;
             }
             try {
                 $evaluate = $page->evaluate($expression);
@@ -292,9 +296,9 @@ class ScraperHelper
             }
 
             if ($action->action === 'click') {
-                $evaluate->waitForPageReload(Page::NETWORK_IDLE, 30000);
+                $evaluate->waitForPageReload(Page::NETWORK_IDLE);
             } else if ($action->action === 'asyncClick') {
-                $evaluate->waitForPageReload(Page::DOM_CONTENT_LOADED, 30000);
+                $evaluate->waitForResponse(30000);
             }
         }
     }
